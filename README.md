@@ -16,7 +16,10 @@ A TypeScript project that explores OpenAI.fm's text-to-speech capabilities throu
 
 ```bash
 # Clone the repository
-git clone https://github.com/springmusk026/OpenFM-API
+git clone https://github.com/springmusk026/OpenFM-API.git
+
+# Change directory
+cd OpenFM-API
 
 # Install dependencies
 npm install
