@@ -1,88 +1,31 @@
-# OpenFM API Reverse Engineering Project
+# 🎯 OpenFM API | Unlimited Text-to-Speech Explorer
 
-This is an educational project that demonstrates how to reverse engineer and interact with the OpenAI.fm text-to-speech API. This project is created purely for learning purposes and to understand API interactions, audio processing, and TypeScript development.
+A TypeScript project that explores OpenAI.fm's text-to-speech capabilities through API reverse engineering. Turn any length of text into natural-sounding speech with parallel processing and smart chunking.
 
-> **Educational Notice**: This is a learning project created to understand API interactions and audio processing. It's not intended for production use or to cause any harm. The project is open source and welcomes improvements and optimizations.
+> **🎓 Educational Notice**: This is a learning project created to understand API interactions and audio processing. Not intended for production use. Please respect API terms of service.
 
-## Features
+## ⚡ Features
 
-- **Smart Text Chunking**: Splits long text at sentence boundaries (up to 1000 chars per chunk)
-- **Parallel Processing**: Processes 3 chunks simultaneously for better performance
-- **Audio Merging**: Combines audio chunks with clean transitions (250ms pause between chunks)
-- **Multiple Voices**: Supports various voice options from the API
-- **Speaking Styles**: Different vibes/styles for speech generation
+* **Unlimited Text Length**: Handles any text size through smart chunking
+* **3x Faster Processing**: Parallel chunk processing (3 simultaneous chunks)
+* **Clean Audio**: 250ms pauses between chunks for natural transitions
+* **Multiple Voices**: 7 different voice options
+* **Speaking Styles**: Various vibes from professional to storytelling
 
-## Technical Implementation
+## 🚀 Quick Start
 
-### Text Processing (`TextChunkerService`)
-```typescript
-// Simple and efficient text chunking at sentence boundaries
-public chunkText(text: string): string[] {
-    if (text.length <= this.maxChunkSize) {
-        return [text];
-    }
-    // Find last period before limit and split
-    ...
-}
+```bash
+# Clone the repository
+git clone https://github.com/springmusk026/OpenFM-API
+
+# Install dependencies
+npm install
+
+# Run the example
+npm start
 ```
 
-### Audio Processing (`AudioUtils`)
-```typescript
-// Merges audio chunks with clean transitions
-public static async mergeAudioBuffersWithCrossfade(
-    buffers: ArrayBuffer[],
-    crossfadeDuration: number = 100
-): Promise<ArrayBuffer> {
-    // Add 250ms pause between chunks for clean transitions
-    ...
-}
-```
-
-### API Integration (`OpenFMService`)
-```typescript
-// Process multiple chunks in parallel
-public async generateAudio(options: AudioGenerationOptions): Promise<ArrayBuffer> {
-    const chunks = this.textChunker.chunkText(input);
-    // Process 3 chunks at a time
-    for (let i = 0; i < chunks.length; i += this.maxParallelCalls) {
-        const batch = chunks.slice(i, Math.min(i + this.maxParallelCalls, chunks.length));
-        await Promise.all(batch.map(...));
-    }
-}
-```
-
-## Quick Start
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/openfm-project
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the example:
-   ```bash
-   npm start
-   ```
-
-## Project Structure
-
-```
-src/
-├── services/
-│   ├── OpenFMService.ts     # Main API interaction
-│   └── TextChunkerService.ts # Text processing
-├── utils/
-│   └── AudioUtils.ts        # Audio processing utilities
-├── types/
-│   └── index.ts            # TypeScript type definitions
-└── index.ts               # Example usage
-```
-
-## Available Voices
+## 🎙️ Available Voices
 - shimmer
 - echo
 - fable
@@ -91,7 +34,7 @@ src/
 - breeze
 - ember
 
-## Speaking Styles
+## 🎭 Speaking Styles
 - professional
 - empathetic
 - storytelling
@@ -100,46 +43,94 @@ src/
 - customer_service
 - meditation
 
-## Recent Optimizations
+## 🛠️ Technical Details
+
+### Text Processing
+```typescript
+// Simple and efficient chunking at sentence boundaries
+public chunkText(text: string): string[] {
+    // Find last period before 1000 char limit
+    const segment = text.slice(0, this.maxChunkSize);
+    const lastPeriod = Math.max(
+        segment.lastIndexOf('. '),
+        segment.lastIndexOf('! '),
+        segment.lastIndexOf('? ')
+    );
+}
+```
+
+### Audio Processing
+```typescript
+// Clean chunk transitions with 250ms pauses
+public static async mergeAudioBuffers(
+    buffers: ArrayBuffer[]
+): Promise<ArrayBuffer> {
+    // Add 250ms silence between chunks
+    const pauseBuffer = createSilentBuffer(250);
+    // Merge with pauses
+}
+```
+
+### Parallel Processing
+```typescript
+// Process 3 chunks simultaneously
+public async generateAudio(text: string): Promise<ArrayBuffer> {
+    const chunks = this.textChunker.chunkText(text);
+    const batchSize = 3;
+    for (let i = 0; i < chunks.length; i += batchSize) {
+        const batch = chunks.slice(i, i + batchSize);
+        await Promise.all(batch.map(chunk => this.processChunk(chunk)));
+    }
+}
+```
+
+## 📁 Project Structure
+```
+src/
+├── services/
+│   ├── OpenFMService.ts     # API interaction & parallel processing
+│   └── TextChunkerService.ts # Smart text chunking
+├── utils/
+│   └── AudioUtils.ts        # Audio merging & processing
+├── types/
+│   └── index.ts            # TypeScript definitions
+└── index.ts                # Example usage
+```
+
+## 🔧 Recent Optimizations
 
 1. **Simplified Text Chunking**
-   - Removed complex preprocessing
-   - Now splits at last sentence boundary before limit
-   - Much simpler and more reliable
+   - Just finds last sentence boundary before limit
+   - No complex preprocessing
+   - Fast and reliable
 
-2. **Improved Audio Merging**
-   - Added 250ms pause between chunks
-   - Removed complex crossfading
-   - Better handling of chunk transitions
+2. **Better Audio Transitions**
+   - 250ms silence between chunks
+   - No more crossfading complexity
+   - Cleaner speech output
 
 3. **Parallel Processing**
-   - Process 3 chunks simultaneously
-   - Maintains chunk order
-   - Significant performance improvement
+   - 3 chunks processed simultaneously
+   - Maintains correct order
+   - Significant speed improvement
 
-## Contributing
+## 🤝 Contributing
 
-This is an educational project and improvements are welcome! Some areas that could use enhancement:
+This is an educational project - improvements welcome! Areas to enhance:
+- [ ] Better error handling
+- [ ] More voice options
+- [ ] Improved audio processing
+- [ ] Web interface
+- [ ] Documentation
 
-- [ ] Better error handling for API failures
-- [ ] More voice and style options
-- [ ] Improved audio processing algorithms
-- [ ] Better text preprocessing
-- [ ] Web interface for testing
-
-## Educational Purpose
-
-This project is created to learn about:
-- API reverse engineering
-- Audio processing in JavaScript/TypeScript
-- Parallel processing techniques
+## 📚 Learning Focus
+- API reverse engineering techniques
+- Audio processing in TypeScript
+- Parallel processing patterns
 - Clean code practices
-- TypeScript type systems
 
-## License
+## ⚖️ License
+MIT License - Free to use for educational purposes.
 
-MIT License - Feel free to use this code for learning and educational purposes.
-
-## Disclaimer
-
-This is a learning project created to understand API interactions and audio processing. It's not intended for production use. Please respect API terms of service in your projects. 
+## ⚠️ Disclaimer
+This is a learning project for understanding API interactions and audio processing. Not intended for production use. 
