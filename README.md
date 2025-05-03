@@ -1,10 +1,10 @@
-# 🎯 OpenFM API | Unlimited Text-to-Speech Explorer
+# OpenFM API | Unlimited Text-to-Speech Explorer
 
 A TypeScript project that explores OpenAI.fm's text-to-speech capabilities through API reverse engineering. Turn any length of text into natural-sounding speech with parallel processing and smart chunking.
 
-> **🎓 Educational Notice**: This is a learning project created to understand API interactions and audio processing. Not intended for production use. Please respect API terms of service.
+> **Educational Notice**: This is a learning project created to understand API interactions and audio processing. Not intended for production use. Please respect API terms of service.
 
-## ⚡ Features
+## Features
 
 * **Unlimited Text Length**: Handles any text size through smart chunking
 * **3x Faster Processing**: Parallel chunk processing (3 simultaneous chunks)
@@ -12,7 +12,7 @@ A TypeScript project that explores OpenAI.fm's text-to-speech capabilities throu
 * **Multiple Voices**: 7 different voice options
 * **Speaking Styles**: Various vibes from professional to storytelling
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone the repository
@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-## 🎙️ Available Voices
+## Available Voices
 - shimmer
 - echo
 - fable
@@ -34,7 +34,7 @@ npm start
 - breeze
 - ember
 
-## 🎭 Speaking Styles
+## Speaking Styles
 - professional
 - empathetic
 - storytelling
@@ -43,7 +43,7 @@ npm start
 - customer_service
 - meditation
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Text Processing
 ```typescript
@@ -84,7 +84,7 @@ public async generateAudio(text: string): Promise<ArrayBuffer> {
 }
 ```
 
-## 📁 Project Structure
+## Project Structure
 ```
 src/
 ├── services/
@@ -97,7 +97,7 @@ src/
 └── index.ts                # Example usage
 ```
 
-## 🔧 Recent Optimizations
+## Recent Optimizations
 
 1. **Simplified Text Chunking**
    - Just finds last sentence boundary before limit
@@ -114,7 +114,7 @@ src/
    - Maintains correct order
    - Significant speed improvement
 
-## 🤝 Contributing
+## Contributing
 
 This is an educational project - improvements welcome! Areas to enhance:
 - [ ] Better error handling
@@ -123,14 +123,14 @@ This is an educational project - improvements welcome! Areas to enhance:
 - [ ] Web interface
 - [ ] Documentation
 
-## 📚 Learning Focus
+## Learning Focus
 - API reverse engineering techniques
 - Audio processing in TypeScript
 - Parallel processing patterns
 - Clean code practices
 
-## ⚖️ License
+## License
 MIT License - Free to use for educational purposes.
 
-## ⚠️ Disclaimer
+## Disclaimer
 This is a learning project for understanding API interactions and audio processing. Not intended for production use. 
